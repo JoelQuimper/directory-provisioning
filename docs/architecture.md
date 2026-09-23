@@ -46,10 +46,10 @@ mais ne dicte pas les choix d'architecture.
 
 - **Auto-hébergé par chaque organisation**, sur site ou dans le nuage de son choix — pas de SaaS
   mutualisé.
-- **Application modulaire** composée d'une API, d'un portail web et de processus *worker*, pouvant
-  être déployés ensemble ou séparément selon la taille de l'organisation.
-- **Pile de référence : .NET 10 / ASP.NET Core** pour le noyau, l'API et les workers; **Blazor Web
-  App** pour le portail d'administration — afin de conserver une solution entièrement .NET.
+- **Application modulaire** composée d'une interface Blazor, de fonctions pour les traitements
+  planifiés et d'un noyau partagé.
+- **Pile de référence : .NET 10**, **Blazor Web App** pour l'interface et **Azure Functions** pour
+  l'acquisition et le provisionnement planifiés, afin de conserver une solution entièrement .NET.
 - Le noyau doit rester indépendant de tout fournisseur infonuagique particulier.
 
 ## 4. Vue d'ensemble
@@ -325,8 +325,9 @@ règle ayant produit la valeur, destinations concernées, état (synchronisée /
 Composants qui supervisent les quatre couches sans constituer une étape de traitement :
 
 - Portail d'administration (Blazor Web App).
-- API de gestion.
-- Orchestrateur de travaux (planification, reprise, concurrence, priorisation).
+- Azure Functions pour les déclenchements manuels et planifiés.
+- Logique d'orchestration partagée entre les différents déclencheurs.
+- API de gestion minimale seulement si les besoins du POC l'exigent.
 - Catalogue de connecteurs (sources et cibles disponibles).
 - Gestion des scripts PowerShell (édition, versions, tests, publication).
 - Prévisualisation et approbation des changements.
@@ -413,8 +414,10 @@ dans des extensions compilées, diagnostic exigeant une expertise très spécial
 
 | Élément | Choix |
 |---|---|
-| Noyau, API, workers | .NET 10 / ASP.NET Core |
-| Portail d'administration | Blazor Web App |
+| Noyau partagé | .NET 10 |
+| Interface | Blazor Web App |
+| Acquisition et provisionnement planifiés | Azure Functions |
+| API | Minimale, ajoutée seulement si requise par le POC |
 | Personnalisation | PowerShell 7 (processus isolé) |
 | Hébergement | Auto-hébergé par chaque organisation, sur site ou dans le nuage de son choix |
 | Base de données | À déterminer (relationnelle, interchangeable) |
