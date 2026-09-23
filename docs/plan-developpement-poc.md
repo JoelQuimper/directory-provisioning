@@ -64,23 +64,28 @@ concevoir le connecteur autour d'une approche qui ne répondrait pas au besoin.
 2. Créer une application « API-driven inbound provisioning to Microsoft Entra ID ».
 3. Définir un périmètre contenant uniquement des identités fictives.
 4. Autoriser l'appel de `/bulkUpload` et la lecture des journaux de provisionnement.
+5. Vérifier si `employeeId` est déjà utilisé et s'il est unique dans le périmètre.
+6. Confirmer le mapping entre `externalId` et l'attribut d'ancrage retenu.
 
 **Étapes**
 
-1. Préparer manuellement le profil SCIM complet d'une personne fictive.
-2. Envoyer un lot contenant une seule opération à `/bulkUpload`.
-3. Conserver l'identifiant de corrélation et la réponse `202 Accepted`.
-4. Suivre l'opération dans les Provisioning Logs.
-5. Confirmer la création du compte dans le tenant de test.
-6. Modifier une propriété simple et renvoyer le profil complet.
-7. Confirmer la modification dans le tenant.
-8. Envoyer le profil avec l'état inactif et confirmer la désactivation.
-9. Renvoyer le même état et confirmer qu'aucun doublon n'est créé.
-10. Documenter le payload, les mappings, les résultats, les délais et les erreurs rencontrées.
+1. Générer avec PowerShell un payload SCIM contenant dix personnes fictives.
+2. Vérifier que les dix identifiants externes, noms d'utilisateur et `bulkId` sont uniques.
+3. Envoyer le lot de dix opérations à `/bulkUpload`.
+4. Conserver l'identifiant de corrélation et la réponse `202 Accepted`.
+5. Suivre les opérations dans les Provisioning Logs.
+6. Confirmer la création des comptes dans le tenant de test.
+7. Modifier une propriété simple et renvoyer les profils complets.
+8. Confirmer les modifications dans le tenant.
+9. Envoyer les profils avec l'état inactif et confirmer les désactivations.
+10. Renvoyer le même état et confirmer qu'aucun doublon n'est créé.
+11. Documenter le payload, les mappings, les résultats, les délais et les erreurs rencontrées.
 
 **Validation**
 
 - Le même identifiant externe retrouve toujours le même compte.
+- L'attribut d'ancrage ne remplace aucune donnée existante du tenant.
+- Le payload contient exactement dix opérations et dix identités uniques.
 - La création, la modification et la désactivation fonctionnent.
 - Les Provisioning Logs permettent de relier chaque résultat à la requête envoyée.
 - Une répétition du même profil ne crée aucun doublon.

@@ -333,6 +333,29 @@ valider la création, la modification, la désactivation, l'idempotence et la qu
 avant de retenir cette approche. Microsoft Graph direct demeure l'alternative si cette évaluation
 n'est pas concluante.
 
+#### Attribut d'ancrage SCIM
+
+Chaque identité doit posséder un identifiant source stable. Le payload le transmet dans
+`externalId`; l'application de provisionnement Entra le mappe vers un attribut cible utilisé pour
+retrouver le même compte lors des chargements suivants.
+
+Le mapping par défaut utilise `employeeId`. Avant de retenir ce choix, il faut vérifier dans le
+tenant cible que cet attribut :
+
+- n'est pas déjà l'autorité d'un autre système;
+- ne contient pas de valeurs incompatibles avec les identifiants de la source;
+- est unique pour la population visée;
+- ne sera pas modifié pendant le cycle de vie d'une personne.
+
+Si `employeeId` est déjà utilisé, le POC ne doit ni l'écraser ni tenter de partager sa signification.
+Il faut sélectionner un autre attribut cible pris en charge par le service de provisionnement,
+garanti unique et réservé à cet usage. Les attributs modifiables comme le courriel, l'UPN ou le nom
+d'affichage ne constituent pas de bons ancrages.
+
+Après la première création, le toolkit conserve également l'identifiant d'objet Entra observé. Cet
+identifiant facilite les lectures et les diagnostics, mais ne remplace pas l'identifiant source
+stable envoyé dans `externalId`.
+
 ### 8.3 Synchronisation complète comme filet de sécurité
 
 La portée du chargement (complet / incrémental / ciblé) et le mode d'application (réconciliation
