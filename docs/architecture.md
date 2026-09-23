@@ -76,10 +76,117 @@ Comparaison et plan de changements"]
 
 Composants qui accompagnent ce flux :
 
-- **Blazor Web App** : consultation des acquisitions, des identités et des plans de changements.
+- **Blazor Web App** : consultation des états et déclenchement explicite des opérations.
 - **Azure Functions** : déclenchement manuel ou planifié des acquisitions et du provisionnement.
 - **Noyau partagé** : modèles, projection canonique, règles d'orchestration et réconciliation.
-- **Stockage du POC** : données acquises, états désirés et rapports de prévisualisation.
+- **Azure Table Storage** : identités, états désirés, activités et résultats opérationnels.
+- **Azure Blob Storage** : données brutes, rapports détaillés et autres documents JSON volumineux.
+- **Azure Queue Storage** : déclenchement asynchrone des étapes lorsque le découplage est utile.
+
+### 4.1 Couches de données inspirées du modèle médaillon
+
+Le POC reprend la séparation Bronze / Argent / Or populaire en analytique, sans introduire de
+plateforme analytique :
+
+| Couche | Nom fonctionnel | Contenu | Stockage |
+|---|---|---|---|
+| Bronze | Acquisition brute | Données reçues de la source, sans transformation | Blob Storage |
+| Argent | Identité canonique | Données normalisées, validées et indépendantes de la source | Table Storage |
+| Or | État désiré | Résultat des règles PowerShell prêt à être comparé à une destination | Table Storage |
+
+Les plans de changements, résultats de provisionnement et états observés sont des données
+opérationnelles. Ils demeurent séparés des trois couches.
+
+Cette séparation permet :
+
+- de rejouer une acquisition à partir de Bronze;
+- de recalculer Argent lorsqu'un mapping change;
+- de recalculer Or lorsqu'une règle PowerShell change;
+- d'expliquer la provenance d'un changement jusqu'à la donnée brute.
+
+Le code et l'interface utilisent les noms fonctionnels `Acquisitions`, `CanonicalIdentities` et
+`DesiredStates`; Bronze, Argent et Or servent seulement à expliquer le modèle architectural.
+
+### 4.2 Activités et événements
+
+L'architecture s'inspire d'une approche événementielle légère. Chaque traitement possède un
+`ActivityId` et produit des événements au fur et à mesure de sa progression.
+
+```mermaid
+flowchart TD
+    Portal["Portail Blazor
+Consulter et déclencher"]
+    Trigger["Function HTTP ou planifiée
+Valider la commande"]
+    Queue["Message de travail"]
+    Function["Function de traitement"]
+    Event["Événement d'activité"]
+    Activity["État courant de l'activité"]
+
+    Portal -->|"Commande manuelle"| Trigger
+    Trigger --> Queue
+    Queue --> Function
+    Function --> Event
+    Event --> Activity
+    Activity -->|"Lecture de l'état"| Portal
+```
+
+Le portail sépare deux usages :
+
+- **Lecture** : afficher les activités, leur statut, leur chronologie, les identités et les plans de
+  changements.
+- **Commande** : demander une acquisition, la génération d'un plan ou, lorsqu'elle sera permise,
+  l'application d'un plan.
+
+Le portail ne contient pas la logique de traitement et n'appelle jamais directement Microsoft
+Graph. Une commande manuelle passe par une fonction HTTP, qui crée l'activité et publie le message
+de travail. Les déclenchements planifiés publient le même message et utilisent ensuite exactement
+le même parcours.
+
+Une commande exprime une intention, par exemple `StartAcquisition` ou `ApplyChangePlan`. Un événement
+décrit un fait déjà survenu, par exemple `AcquisitionCompleted` ou `ProvisioningFailed`.
+
+Deux tables ont des responsabilités distinctes :
+
+| Table | Responsabilité |
+|---|---|
+| `ActivityEvents` | Journal immuable de tout ce qui s'est produit |
+| `Activities` | Projection consolidée du dernier état de chaque activité |
+
+Une table d'événements seule permettrait de reconstruire l'état, mais obligerait le portail à relire
+tout l'historique. La table `Activities` fournit directement les activités en cours et leur statut,
+tandis que `ActivityEvents` conserve la chronologie complète.
+
+Statuts minimaux :
+
+```text
+Pending → Running → Succeeded
+                  ↘ Failed
+```
+
+Événements initiaux :
+
+- `ActivityRequested`
+- `ActivityStarted`
+- `AcquisitionCompleted`
+- `CanonicalProjectionCompleted`
+- `DesiredStateCompleted`
+- `ChangePlanCompleted`
+- `ProvisioningCompleted`
+- `ActivityFailed`
+
+Chaque événement contient au minimum :
+
+- `ActivityId`
+- `EventId`
+- `EventType`
+- `OccurredAt`
+- `Status`
+- `CorrelationId`
+- une référence vers le détail dans Blob Storage lorsque nécessaire.
+
+Pour le POC, les événements servent au suivi et au découplage des traitements. Les tables de données
+demeurent les sources de vérité; le système n'implémente pas un *event sourcing* complet.
 
 ## 5. Couche 1 — Acquisition et normalisation
 
@@ -218,6 +325,13 @@ opérations idempotentes. Les scripts PowerShell locaux n'ont pas besoin de conn
 
 Ordre de priorité des cibles : **Microsoft Entra ID** en premier; Active Directory et Google
 Workspace comme extensions ultérieures du même mécanisme de connecteur.
+
+Pour Microsoft Entra ID, le premier mécanisme évalué est l'approvisionnement entrant piloté par API
+avec `/bulkUpload`. Cette API utilise des structures SCIM et délègue au service de provisionnement
+Entra le rapprochement, le mapping et l'application des changements. Un jalon technique isolé doit
+valider la création, la modification, la désactivation, l'idempotence et la qualité des journaux
+avant de retenir cette approche. Microsoft Graph direct demeure l'alternative si cette évaluation
+n'est pas concluante.
 
 ### 8.3 Synchronisation complète comme filet de sécurité
 
@@ -399,6 +513,9 @@ dans des extensions compilées, diagnostic exigeant une expertise très spécial
 | Interface | Blazor Web App |
 | Acquisition et provisionnement planifiés | Azure Functions |
 | API | Minimale, ajoutée seulement si requise par le POC |
+| Données structurées et suivi des activités | Azure Table Storage |
+| Données brutes et rapports détaillés | Azure Blob Storage |
+| Déclenchements asynchrones | Azure Queue Storage |
 | Personnalisation | PowerShell 7 (processus isolé) |
 | Hébergement | Auto-hébergé par chaque organisation, sur site ou dans le nuage de son choix |
 | Base de données | À déterminer (relationnelle, interchangeable) |
