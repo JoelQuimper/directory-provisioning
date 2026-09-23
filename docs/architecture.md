@@ -55,50 +55,31 @@ mais ne dicte pas les choix d'architecture.
 ## 4. Vue d'ensemble
 
 ```mermaid
-flowchart LR
-    Sources["Sources hétérogènes
-SQL · API · fichiers"]
+flowchart TD
+    Source["Source SQL simulée"]
+    Acquisition["1. Acquisition
+Lecture et conservation des données brutes"]
+    Canonical["2. Identité canonique
+Projection vers un modèle commun"]
+    Rules["3. Personnalisation
+Règles PowerShell et état désiré"]
+    Reconciliation["4. Réconciliation
+Comparaison et plan de changements"]
+    Target["Tenant Microsoft Entra ID de test"]
 
-    subgraph L1["1. Acquisition"]
-        Metadata["Métadonnées configurables"]
-        Connectors["Moteurs de connecteurs génériques"]
-        Staging["Zone d'acquisition"]
-    end
-
-    subgraph L2["2. Identité canonique"]
-        Canonical["Modèle canonique"]
-        Correlation["Rapprochement / correspondance"]
-    end
-
-    subgraph L3["3. Personnalisation locale"]
-        PowerShell["Règles PowerShell"]
-        Desired["État désiré"]
-    end
-
-    subgraph L4["4. Provisionnement"]
-        Diff["Comparaison / réconciliation"]
-        Plan["Plan de changements"]
-        Targets["Entra ID · AD · Google"]
-    end
-
-    Sources --> Connectors
-    Metadata --> Connectors
-    Connectors --> Staging
-    Staging --> Correlation
-    Correlation --> Canonical
-    Canonical --> PowerShell
-    PowerShell --> Desired
-    Desired --> Diff
-    Diff --> Plan
-    Plan --> Targets
-
-    Control["Portail admin · orchestration · sécurité
-audit · observabilité · services libre-service"]
-    Control -. supervise .-> L1
-    Control -. supervise .-> L2
-    Control -. supervise .-> L3
-    Control -. supervise .-> L4
+    Source --> Acquisition
+    Acquisition --> Canonical
+    Canonical --> Rules
+    Rules --> Reconciliation
+    Reconciliation --> Target
 ```
+
+Composants qui accompagnent ce flux :
+
+- **Blazor Web App** : consultation des acquisitions, des identités et des plans de changements.
+- **Azure Functions** : déclenchement manuel ou planifié des acquisitions et du provisionnement.
+- **Noyau partagé** : modèles, projection canonique, règles d'orchestration et réconciliation.
+- **Stockage du POC** : données acquises, états désirés et rapports de prévisualisation.
 
 ## 5. Couche 1 — Acquisition et normalisation
 
