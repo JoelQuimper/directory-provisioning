@@ -1,0 +1,344 @@
+{
+  "schemas": [
+    "urn:ietf:params:scim:api:messages:2.0:BulkRequest"
+  ],
+  "Operations": [
+    {
+      "method": "POST",
+      "bulkId": "0bdb7da9-f759-42eb-9c64-e64ac6b49dff",
+      "path": "/Users",
+      "data": {
+        "schemas": [
+          "urn:ietf:params:scim:schemas:core:2.0:User",
+          "urn:ietf:params:scim:schemas:extension:enterprise:2.0:User"
+        ],
+        "externalId": "SCIM-TEST-0004",
+        "userName": "scim.test04@example.onmicrosoft.com",
+        "name": {
+          "givenName": "Scim",
+          "familyName": "Test4"
+        },
+        "displayName": "Scim Test4",
+        "active": true,
+        "userType": "Employee",
+        "title": "Test User - Updated Load 3",
+        "preferredLanguage": "fr-CA",
+        "urn:ietf:params:scim:schemas:extension:enterprise:2.0:User": {
+          "employeeNumber": "SCIM-TEST-0004",
+          "organization": "Provisioning POC",
+          "division": "SCIM Evaluation",
+          "department": "Batch 3"
+        }
+      }
+    },
+    {
+      "method": "POST",
+      "bulkId": "ae8be72e-d61d-4615-8a9e-dd496beb2a59",
+      "path": "/Users",
+      "data": {
+        "schemas": [
+          "urn:ietf:params:scim:schemas:core:2.0:User",
+          "urn:ietf:params:scim:schemas:extension:enterprise:2.0:User"
+        ],
+        "externalId": "SCIM-TEST-0005",
+        "userName": "scim.test05@example.onmicrosoft.com",
+        "name": {
+          "givenName": "Scim",
+          "familyName": "Test5"
+        },
+        "displayName": "Scim Test5",
+        "active": true,
+        "userType": "Employee",
+        "title": "Test User - Updated Load 3",
+        "preferredLanguage": "fr-CA",
+        "urn:ietf:params:scim:schemas:extension:enterprise:2.0:User": {
+          "employeeNumber": "SCIM-TEST-0005",
+          "organization": "Provisioning POC",
+          "division": "SCIM Evaluation",
+          "department": "Batch 3"
+        }
+      }
+    },
+    {
+      "method": "POST",
+      "bulkId": "e5ac302a-af2e-4806-b141-c920cf27cf1e",
+      "path": "/Users",
+      "data": {
+        "schemas": [
+          "urn:ietf:params:scim:schemas:core:2.0:User",
+          "urn:ietf:params:scim:schemas:extension:enterprise:2.0:User"
+        ],
+        "externalId": "SCIM-TEST-0006",
+        "userName": "scim.test06@example.onmicrosoft.com",
+        "name": {
+          "givenName": "Scim",
+          "familyName": "Test6"
+        },
+        "displayName": "Scim Test6",
+        "active": true,
+        "userType": "Employee",
+        "title": "Test User - Updated Load 3",
+        "preferredLanguage": "fr-CA",
+        "urn:ietf:params:scim:schemas:extension:enterprise:2.0:User": {
+          "employeeNumber": "SCIM-TEST-0006",
+          "organization": "Provisioning POC",
+          "division": "SCIM Evaluation",
+          "department": "Batch 3"
+        }
+      }
+    },
+    {
+      "method": "POST",
+      "bulkId": "bcd483d0-eece-4acd-8170-6e3e1c3b2996",
+      "path": "/Users",
+      "data": {
+        "schemas": [
+          "urn:ietf:params:scim:schemas:core:2.0:User",
+          "urn:ietf:params:scim:schemas:extension:enterprise:2.0:User"
+        ],
+        "externalId": "SCIM-TEST-0007",
+        "userName": "scim.test07@example.onmicrosoft.com",
+        "name": {
+          "givenName": "Scim",
+          "familyName": "Test7"
+        },
+        "displayName": "Scim Test7",
+        "active": true,
+        "userType": "Employee",
+        "title": "Test User - Updated Load 3",
+        "preferredLanguage": "fr-CA",
+        "urn:ietf:params:scim:schemas:extension:enterprise:2.0:User": {
+          "employeeNumber": "SCIM-TEST-0007",
+          "organization": "Provisioning POC",
+          "division": "SCIM Evaluation",
+          "department": "Batch 3"
+        }
+      }
+    },
+    {
+      "method": "POST",
+      "bulkId": "8a95263d-83fa-4f08-ae2d-eacd6aad7090",
+      "path": "/Users",
+      "data": {
+        "schemas": [
+          "urn:ietf:params:scim:schemas:core:2.0:User",
+          "urn:ietf:params:scim:schemas:extension:enterprise:2.0:User"
+        ],
+        "externalId": "SCIM-TEST-0008",
+        "userName": "scim.test08@example.onmicrosoft.com",
+        "name": {
+          "givenName": "Scim",
+          "familyName": "Test8"
+        },
+        "displayName": "Scim Test8",
+        "active": true,
+        "userType": "Employee",
+        "title": "Test User - Updated Load 3",
+        "preferredLanguage": "fr-CA",
+        "urn:ietf:params:scim:schemas:extension:enterprise:2.0:User": {
+          "employeeNumber": "SCIM-TEST-0008",
+          "organization": "Provisioning POC",
+          "division": "SCIM Evaluation",
+          "department": "Batch 3"
+        }
+      }
+    },
+    {
+      "method": "POST",
+      "bulkId": "8a57a3a2-8ee4-459c-b8cf-eeca8e849f76",
+      "path": "/Users",
+      "data": {
+        "schemas": [
+          "urn:ietf:params:scim:schemas:core:2.0:User",
+          "urn:ietf:params:scim:schemas:extension:enterprise:2.0:User"
+        ],
+        "externalId": "SCIM-TEST-0013",
+        "userName": "scim.test13@example.onmicrosoft.com",
+        "name": {
+          "givenName": "Scim",
+          "familyName": "Test13"
+        },
+        "displayName": "Scim Test13",
+        "active": true,
+        "userType": "Employee",
+        "title": "Test User",
+        "preferredLanguage": "fr-CA",
+        "urn:ietf:params:scim:schemas:extension:enterprise:2.0:User": {
+          "employeeNumber": "SCIM-TEST-0013",
+          "organization": "Provisioning POC",
+          "division": "SCIM Evaluation",
+          "department": "POC"
+        }
+      }
+    },
+    {
+      "method": "POST",
+      "bulkId": "5bbc6c70-5036-4beb-8c7d-fcf2f2a6db93",
+      "path": "/Users",
+      "data": {
+        "schemas": [
+          "urn:ietf:params:scim:schemas:core:2.0:User",
+          "urn:ietf:params:scim:schemas:extension:enterprise:2.0:User"
+        ],
+        "externalId": "SCIM-TEST-0014",
+        "userName": "scim.test14@example.onmicrosoft.com",
+        "name": {
+          "givenName": "Scim",
+          "familyName": "Test14"
+        },
+        "displayName": "Scim Test14",
+        "active": true,
+        "userType": "Employee",
+        "title": "Test User",
+        "preferredLanguage": "fr-CA",
+        "urn:ietf:params:scim:schemas:extension:enterprise:2.0:User": {
+          "employeeNumber": "SCIM-TEST-0014",
+          "organization": "Provisioning POC",
+          "division": "SCIM Evaluation",
+          "department": "POC"
+        }
+      }
+    },
+    {
+      "method": "POST",
+      "bulkId": "e403a770-840f-44e8-89af-005041ab95bd",
+      "path": "/Users",
+      "data": {
+        "schemas": [
+          "urn:ietf:params:scim:schemas:core:2.0:User",
+          "urn:ietf:params:scim:schemas:extension:enterprise:2.0:User"
+        ],
+        "externalId": "SCIM-TEST-0015",
+        "userName": "scim.test15@example.onmicrosoft.com",
+        "name": {
+          "givenName": "Scim",
+          "familyName": "Test15"
+        },
+        "displayName": "Scim Test15",
+        "active": true,
+        "userType": "Employee",
+        "title": "Test User",
+        "preferredLanguage": "fr-CA",
+        "urn:ietf:params:scim:schemas:extension:enterprise:2.0:User": {
+          "employeeNumber": "SCIM-TEST-0015",
+          "organization": "Provisioning POC",
+          "division": "SCIM Evaluation",
+          "department": "POC"
+        }
+      }
+    },
+    {
+      "method": "POST",
+      "bulkId": "15952897-33f9-416a-8ed2-522549f35b9e",
+      "path": "/Users",
+      "data": {
+        "schemas": [
+          "urn:ietf:params:scim:schemas:core:2.0:User",
+          "urn:ietf:params:scim:schemas:extension:enterprise:2.0:User"
+        ],
+        "externalId": "SCIM-TEST-0016",
+        "userName": "scim.test16@example.onmicrosoft.com",
+        "name": {
+          "givenName": "Scim",
+          "familyName": "Test16"
+        },
+        "displayName": "Scim Test16",
+        "active": true,
+        "userType": "Employee",
+        "title": "Test User",
+        "preferredLanguage": "fr-CA",
+        "urn:ietf:params:scim:schemas:extension:enterprise:2.0:User": {
+          "employeeNumber": "SCIM-TEST-0016",
+          "organization": "Provisioning POC",
+          "division": "SCIM Evaluation",
+          "department": "POC"
+        }
+      }
+    },
+    {
+      "method": "POST",
+      "bulkId": "e05ba380-4397-473c-899d-7574ce119b7f",
+      "path": "/Users",
+      "data": {
+        "schemas": [
+          "urn:ietf:params:scim:schemas:core:2.0:User",
+          "urn:ietf:params:scim:schemas:extension:enterprise:2.0:User"
+        ],
+        "externalId": "SCIM-TEST-0017",
+        "userName": "scim.test17@example.onmicrosoft.com",
+        "name": {
+          "givenName": "Scim",
+          "familyName": "Test17"
+        },
+        "displayName": "Scim Test17",
+        "active": true,
+        "userType": "Employee",
+        "title": "Test User",
+        "preferredLanguage": "fr-CA",
+        "urn:ietf:params:scim:schemas:extension:enterprise:2.0:User": {
+          "employeeNumber": "SCIM-TEST-0017",
+          "organization": "Provisioning POC",
+          "division": "SCIM Evaluation",
+          "department": "POC"
+        }
+      }
+    },
+    {
+      "method": "POST",
+      "bulkId": "eb2ccb6c-0abf-4844-bbb0-ecb9fd3e4290",
+      "path": "/Users",
+      "data": {
+        "schemas": [
+          "urn:ietf:params:scim:schemas:core:2.0:User",
+          "urn:ietf:params:scim:schemas:extension:enterprise:2.0:User"
+        ],
+        "externalId": "SCIM-TEST-0009",
+        "userName": "scim.test09@example.onmicrosoft.com",
+        "name": {
+          "givenName": "Scim",
+          "familyName": "Test9"
+        },
+        "displayName": "Scim Test9",
+        "active": false,
+        "userType": "Employee",
+        "title": "Test User",
+        "preferredLanguage": "fr-CA",
+        "urn:ietf:params:scim:schemas:extension:enterprise:2.0:User": {
+          "employeeNumber": "SCIM-TEST-0009",
+          "organization": "Provisioning POC",
+          "division": "SCIM Evaluation",
+          "department": "POC"
+        }
+      }
+    },
+    {
+      "method": "POST",
+      "bulkId": "f8b21cc5-ed28-4de2-91c6-cdd5cebe6480",
+      "path": "/Users",
+      "data": {
+        "schemas": [
+          "urn:ietf:params:scim:schemas:core:2.0:User",
+          "urn:ietf:params:scim:schemas:extension:enterprise:2.0:User"
+        ],
+        "externalId": "SCIM-TEST-0010",
+        "userName": "scim.test10@example.onmicrosoft.com",
+        "name": {
+          "givenName": "Scim",
+          "familyName": "Test10"
+        },
+        "displayName": "Scim Test10",
+        "active": false,
+        "userType": "Employee",
+        "title": "Test User",
+        "preferredLanguage": "fr-CA",
+        "urn:ietf:params:scim:schemas:extension:enterprise:2.0:User": {
+          "employeeNumber": "SCIM-TEST-0010",
+          "organization": "Provisioning POC",
+          "division": "SCIM Evaluation",
+          "department": "POC"
+        }
+      }
+    }
+  ],
+  "failOnErrors": null
+}
