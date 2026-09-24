@@ -48,7 +48,7 @@ Ces sujets demeurent importants, mais ils ne doivent pas ralentir la validation 
 
 ## 3. Jalons
 
-### Jalon 0 — Valider SCIM avec le tenant de test
+### Jalon 0 — Valider `/bulkUpload` avec le tenant de test
 
 **Objectif**
 
@@ -57,6 +57,9 @@ de premier mécanisme de provisionnement du POC.
 
 Ce jalon est un *spike* technique isolé. Il précède la construction de la solution afin d'éviter de
 concevoir le connecteur autour d'une approche qui ne répondrait pas au besoin.
+
+L'API SCIM directe `/rp/scim` est exclue de la cible : son module complémentaire est facturé par
+appel et ne convient pas à la volumétrie prévue. Le présent jalon évalue uniquement `/bulkUpload`.
 
 **Préalables**
 
@@ -94,9 +97,9 @@ concevoir le connecteur autour d'une approche qui ne répondrait pas au besoin.
 
 **Décision de fin de jalon**
 
-- **SCIM retenu** : `/bulkUpload` devient le premier adaptateur de provisionnement du POC.
-- **SCIM rejeté** : documenter la raison et utiliser Microsoft Graph directement pour les jalons de
-  provisionnement.
+- **`/bulkUpload` retenu** : il devient le premier adaptateur de provisionnement du POC.
+- **`/bulkUpload` rejeté** : documenter la raison et utiliser Microsoft Graph directement pour les
+  jalons de provisionnement.
 
 **Hors portée**
 

@@ -336,7 +336,7 @@ valider la création, la modification, la désactivation, l'idempotence et la qu
 avant de retenir cette approche. Microsoft Graph direct demeure l'alternative si cette évaluation
 n'est pas concluante.
 
-#### Attribut d'ancrage SCIM
+#### Attribut d'ancrage de `/bulkUpload`
 
 Chaque identité doit posséder un identifiant source stable. Le payload le transmet dans
 `externalId`; l'application de provisionnement Entra le mappe vers un attribut cible utilisé pour
@@ -583,7 +583,13 @@ architectural :
     casser les personnalisations locales).
 11. Continuité de service du toolkit lui-même (sauvegardes de configuration et de secrets, reprise).
 
-## 17. Portée et décisions du POC
+## 17. Décisions d'architecture
+
+| ID | Date | Décision | Statut | Solutions écartées ou différées | Motif |
+|---|---|---|---|---|---|
+| DA-001 | 2026-09-24 | Évaluer `/bulkUpload` comme premier mécanisme de provisionnement Entra; conserver Microsoft Graph direct comme solution de repli | En évaluation | API SCIM directe `/rp/scim` écartée | Module [facturé par appel](https://azure.microsoft.com/pricing/details/entraid/scimapi/); coût incompatible avec 60 000 identités et une synchronisation quotidienne |
+
+## 18. Portée et décisions du POC
 
 - La première source est une base SQL simulée avec un schéma et des données représentatifs, sans
   dépendance à un produit ou à une organisation réelle.
