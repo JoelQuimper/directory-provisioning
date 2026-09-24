@@ -583,7 +583,7 @@ architectural :
     casser les personnalisations locales).
 11. Continuité de service du toolkit lui-même (sauvegardes de configuration et de secrets, reprise).
 
-## 17. Décisions d'architecture
+## 17. Journal de décisions d'architecture
 
 | ID | Date | Décision | Statut | Solutions écartées ou différées | Motif |
 |---|---|---|---|---|---|
