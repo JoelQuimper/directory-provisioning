@@ -114,9 +114,9 @@ aurait appliqués, sans écrire dans les répertoires.
 
 | Sujet | Lié à l'étape | Référence |
 |---|---|---|
-| Contenu du schéma et du jeu de données SQL simulé | Étape 0 / 1 | Architecture §17 |
-| Modèle exact du contrat canonique v1 | Étape 1 | Architecture §17 |
-| Format des métadonnées de connecteur | Étape 1 | Architecture §5.1, §17 |
+| Contenu du schéma et du jeu de données SQL simulé | Étape 0 / 1 | Architecture §18 |
+| Modèle exact du contrat canonique v1 | Étape 1 | Architecture §18 |
+| Format des métadonnées de connecteur | Étape 1 | Architecture §5.1, §18 |
 | Rapprochement initial des comptes existants (« join ») | Étape 3 | Architecture §6.3 |
 | Nom usuel versus nom légal | Étape 1 ou 5 | Architecture §6.4 |
 | Populations particulières (stagiaires, suppléants, bénévoles) | Étape 1 ou 7 | Architecture §16.4 |
