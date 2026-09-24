@@ -6,6 +6,9 @@ Document de travail pour un prototype technique. Il vise à valider l'architectu
 de réalisation et à réduire les principales incertitudes. Les sections marquées
 **« À approfondir »** identifient des sujets déjà repérés mais non encore détaillés.
 
+Les écarts entre cette cible d'architecture et les contrôles de sécurité effectivement vérifiés sont
+suivis dans le [registre des écarts de cybersécurité](./registre-ecarts-cybersecurite.md).
+
 ## 1. Contexte et positionnement
 
 De nombreuses organisations utilisent **Microsoft Identity Manager (MIM)** pour synchroniser les

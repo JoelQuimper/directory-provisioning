@@ -5,6 +5,9 @@ Remplacement de MIM. Complémentaire à [architecture.md](./architecture.md).
 La réalisation du prototype est découpée en petits jalons testables dans le
 [plan de développement du POC](./plan-developpement-poc.md).
 
+Le [registre des écarts de cybersécurité](./registre-ecarts-cybersecurite.md) est révisé au fil des
+jalons et fait partie des critères de passage vers le pilote et la production.
+
 Règle simple : MIM reste responsable pendant que le toolkit est testé en parallèle. Une fois les
 résultats validés, le toolkit remplace MIM.
 
