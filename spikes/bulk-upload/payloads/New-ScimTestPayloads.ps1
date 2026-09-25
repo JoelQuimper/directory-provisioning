@@ -4,7 +4,7 @@ param(
     [ValidatePattern('^[A-Za-z0-9.-]+\.[A-Za-z]{2,}$')]
     [string] $Domain,
 
-    [string] $OutputDirectory = (Join-Path $PSScriptRoot '..\samples\scim')
+    [string] $OutputDirectory = (Join-Path $PSScriptRoot 'payloads')
 )
 
 Set-StrictMode -Version Latest
